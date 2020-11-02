@@ -2,7 +2,7 @@ package ru.netology.domain;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class RadiomanTest {
     @Test
@@ -29,7 +29,7 @@ public class RadiomanTest {
 
     @Test
     void shouldChangePrevNumberStation() {
-        Radioman radioman = new Radioman(5, 10);
+        Radioman radioman= new Radioman(5, 10);
         radioman.changePrevNumberStation();
         assertEquals(4, radioman.getCurrentStation());
     }
@@ -43,7 +43,7 @@ public class RadiomanTest {
 
     @Test
     void shouldIncreaseVolumeHighMax() {
-        Radioman radioman= new Radioman(100, 100, 0);
+        Radioman radioman = new Radioman(100, 100, 0);
         radioman.increaseVolume();
         assertEquals(100, radioman.getCurrentVolume());
     }
