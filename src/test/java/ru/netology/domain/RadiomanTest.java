@@ -4,114 +4,61 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class RadiomanTest {
-    Radioman radioman = new Radioman();
-
-
-    private void constValue() {
-        radioman.setMaxStation(9);
-        radioman.setMinStation(0);
-        radioman.setMaxVolume(10);
-        radioman.setMinVolume(0);
-    }
-//станции
-
-    @Test                                  //увеличение станции на 1
-    void shouldNextNumberStation() {
-        constValue();
-        radioman.setCurrentStation(8);
-        radioman.nextNumberStation ();
-        assertEquals(9, radioman.getCurrentStation());
-    }
-
-
-
-    @Test                                   //уменьшение станции на 1
-    void shouldPrevNumberStation() {
-        constValue();
-        radioman.setCurrentStation (1);
-        radioman.prevNumberStation ();
+public class RadiomanTest {
+    @Test
+    void shouldChangeNextMaxNumberStation() {
+        Radioman radioman = new Radioman(10, 10);
+        radioman.changeNextNumberStation();
         assertEquals(0, radioman.getCurrentStation());
     }
 
-    @Test                                 // уменьшение мин.значения станции
-    void shouldPrevMinNumberStation() {
-        constValue();
-        radioman.setCurrentStation(0);
-        radioman.prevNumberStation ();
-        assertEquals(9, radioman.getCurrentStation());
+    @Test
+    void shouldChangeNextNumberStation() {
+        Radioman radioman = new Radioman(5, 10);
+        radioman.changeNextNumberStation();
+        assertEquals(6, radioman.getCurrentStation());
     }
-    @Test                                  //увеличение макс.значения станции
-    void shouldNextMaxNumberStation() {
-        constValue();
-        radioman.setCurrentStation(9);
-        radioman.nextNumberStation();
-        assertEquals(0, radioman.getCurrentStation());
+
+
+    @Test
+    void shouldChangePrevMinNumberStationB() {
+        Radioman radioman = new Radioman(0, 10);
+        radioman.changePrevNumberStation();
+        assertEquals(10, radioman.getCurrentStation());
     }
-        @Test                                  //увеличение макс.значения станции
-        void shouldCurrentStationHighMax() {
-            constValue();
-            radioman.setCurrentStation(10);
-            assertEquals(0, radioman.getCurrentStation());
-        }
 
+    @Test
+    void shouldChangePrevNumberStation() {
+        Radioman radioman = new Radioman(5, 10);
+        radioman.changePrevNumberStation();
+        assertEquals(4, radioman.getCurrentStation());
+    }
 
-        @Test                                  // уменьшение мин.значения станции
-        void shouldCurrentStationBelowMin() {
-            constValue();
-            radioman.setCurrentStation(-1);
-            assertEquals(0, radioman.getCurrentStation());
-        }
-
-
-// громкость
-    @Test                                     //увеличение на 1
-    void shouldIncreaseVolume() {
-        constValue();
-        radioman.setCurrentVolume(9);
+    @Test
+    void shouldIncreaseVolumeUnderMax() {
+        Radioman radioman= new Radioman(16, 100, 0);
         radioman.increaseVolume();
-        assertEquals(10, radioman.getCurrentVolume());
+        assertEquals(17, radioman.getCurrentVolume());
     }
 
+    @Test
+    void shouldIncreaseVolumeHighMax() {
+        Radioman radioman= new Radioman(100, 100, 0);
+        radioman.increaseVolume();
+        assertEquals(100, radioman.getCurrentVolume());
+    }
 
-    @Test                            //уменьшение на 1
+    @Test
     void shouldDecreaseVolume() {
-        constValue();
-        radioman.setCurrentVolume(1);
+        Radioman radioman = new Radioman(15, 100, 0);
+        radioman.decreaseVolume();
+        assertEquals(14, radioman.getCurrentVolume());
+    }
+
+    @Test
+    void shouldDecreaseVolumeBelowMin() {
+        Radioman radioman = new Radioman(0, 100, 0);
         radioman.decreaseVolume();
         assertEquals(0, radioman.getCurrentVolume());
     }
-
-    @Test                           //увеличение макс.значения громкости
-    void shouldCurrentVolumeHighMax() {
-        constValue();
-        radioman.setCurrentVolume(11);
-        assertEquals(0, radioman.getCurrentVolume());
-    }
-
-    @Test                              //уменьшение мин.значения громкости
-    void shouldCurrentVolumeBelowMin() {
-        constValue();
-        radioman.setCurrentVolume(-1);
-        assertEquals(0, radioman.getCurrentVolume());
-    }
-
-    @Test                   //увеличение громкости на 1
-    void shouldIncreaseMaxVolume() {
-        constValue();
-        radioman.setCurrentVolume(10);
-        radioman.increaseVolume();
-        assertEquals(10, radioman.getCurrentVolume());
-    }
-
-    @Test              //уменьшение громкости на 1
-    void shouldDecreaseMinVolume() {
-        constValue();
-        radioman.setCurrentVolume(0);
-        radioman.decreaseVolume();
-        assertEquals(0, radioman.getCurrentVolume());
-    }
-
 }
-
-
